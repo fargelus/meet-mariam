@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./lib/moment.js"></script>
+    <script src="./lib/plural.js"></script>
+    <title>Dmishka ❤️ Mariam</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const meetDate = moment(new Date("2023-06-08T18:30:00"));
+            const diff = document.getElementById("diff");
+            const calculateDate = () => {
+                const now = moment(new Date());
+                const duration = moment.duration(now.diff(meetDate));
+                
+                const years = duration.years();
+                const pluralYears = getPluralNoun(years, "год", "года", "лет");
+                
+                const months = duration.months();
+                const pluralMonths = getPluralNoun(months, "месяц", "месяца", "месяцев");
+
+                const days = duration.days();
+                const pluralDays = getPluralNoun(days, "день", "дня", "дней");
+
+                const hours = duration.hours();
+                const pluralHours = getPluralNoun(hours, "час", "часа", "часов");
+                
+                const minutes = duration.minutes();
+                const pluralMinutes = getPluralNoun(minutes, "минуту", "минуты", "минут");
+                
+                const seconds = duration.seconds();
+                const pluralSeconds = getPluralNoun(seconds, "секунду", "секунды", "секунд");
+
+                diff.innerHTML = `${years} ${pluralYears} 
+                    ${months} ${pluralMonths} 
+                    ${days} ${pluralDays} 
+                    ${hours} ${pluralHours} 
+                    ${minutes} ${pluralMinutes} 
+                    ${seconds} ${pluralSeconds}`;
+            };
+            calculateDate();
+            setInterval(calculateDate, 1000);
+        });
+    </script>
+    <style>
+        .intro {
+            font-size: 25px;
+        }
+
+        .diff {
+            font-size: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <p class="intro">
+        Дмишка знаком с Мими уже:
+    </p>
+    <div class="diff" id="diff"></div>
+</body>
+</html>
